@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>파이썬 원천징수 계산기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+<div class="border border-dark p-3 mt-2">
+    <div>나의 월급에서 공제되는 원천징수액은?</div>
+    <div class="row mt-2">
+        <div class="col-auto">
+            <label for="earnedIncomePay" class="col-form-label fw-bold">월 급여액 :</label>
+        </div>
+        <div class="col-auto">
+            <div class="input-group">
+                <input type="text" id="earnedIncomePay" class="form-control text-end"">
+                <span class="input-group-text">원</span>
+            </div>
+            <div id="earnedIncomePayWon" class="text-primary text-end pe-3"></div>
+        </div>
+    </div>
+    <div class="border-bottom border-dark my-3"></div>
+    <div class="row mt-2">
+        <div class="col-auto">
+            <label for="earnedIncomeFamily" class="col-form-label fw-bold">전체 공제대상 가족 수(본인 포함) :</label>
+        </div>
+        <div class="col-auto">
+            <select class="form-select" name="earnedIncomeFamily" id="earnedIncomeFamily">
+                <option value="1">1인</option>
+                <option value="2">2인</option>
+                <option value="3">3인</option>
+                <option value="4">4인</option>
+                <option value="5">5인</option>
+                <option value="6">6인</option>
+                <option value="7">7인</option>
+                <option value="8">8인</option>
+                <option value="9">9인</option>
+                <option value="10">10인</option>
+                <option value="11">11인</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-auto">
+            <label for="earnedIncomeChild" class="col-form-label fw-bold">전체 공제대상 가족 중 7세 이상 20세 이하 자녀 수 :</label>
+        </div>
+        <div class="col-auto">
+            <select class="form-select" name="earnedIncomeChild" id="earnedIncomeChild">
+                <option value="0">0인</option>
+                <option value="1">1인</option>
+                <option value="2">2인</option>
+                <option value="3">3인</option>
+                <option value="4">4인</option>
+                <option value="5">5인</option>
+                <option value="6">6인</option>
+                <option value="7">7인</option>
+                <option value="8">8인</option>
+                <option value="9">9인</option>
+                <option value="10">10인</option>
+                <option value="11">11인</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <button class="btn btn-danger" id="cal_earnedIncome">계산하기</button>
+            <button class="btn btn-secondary" id="clear_earnedIncome">다시하기</button>
+        </div>
+    </div>
+</div>
+<div id="resultPannel" class="result-earned-income-tax hide-result border border-dark p-3" style="">
+    <div class="section">
+        <div class=""><h2>원천징수 총액 : <span id="totalWithholding">123,499</span> 원</h2></div>
+
+    </div>
+    <div class="section">
+        <div class="title">▶ 근로소독세 원천</div>
+        <div class="row px-4">
+            <div class="col-12 col-md-6 border-top">
+                <div class="row">
+                    <div class="income_tax_label text-secondary w-50">소득세</div>
+                    <div class="income_tax_result text-secondary text-end w-25"><span id="incomeTax">6,730</span> 원</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top">
+                <div class="row">
+                    <div class="local_income_tax_label text-secondary w-50"></div>
+                    <div class="local_income_tax_result text-secondary w-50"></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-secondary w-50">지방소득세</div>
+                    <div class="income_tax_sum_result text-secondary text-end w-25"><span id="localIncomeTax">6,730</span> 원</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-primary w-50 ">납부세액의 합계액</div>
+                    <div class="income_tax_sum_result text-primary text-end w-25"><span id="totalIncomeTax">6,730</span> 원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section mt-5">
+        <div class="title">▶ 연금보험</div>
+        <div class="row px-4">
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-secondary w-50">연금보험료</div>
+                    <div class="income_tax_sum_result text-secondary text-end w-25"><span id="pensionInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-primary w-50">납부보험료 합계액</div>
+                    <div class="income_tax_sum_result text-primary text-end w-25"><span id="totalPensionInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="title">▶ 건강보험(장기요양)</div>
+        <div class="row px-4">
+            <div class="col-12 col-md-6 border-top">
+                <div class="row">
+                    <div class="income_tax_sum_label text-secondary w-50">건강보험료</div>
+                    <div class="income_tax_result text-secondary text-end w-25"><span id="healthInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top">
+                <div class="row">
+                    <div class="income_tax_sum_label text-secondary w-50"></div>
+                    <div class="local_income_tax_result text-secondary text-end w-25"></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-secondary w-50">장기요양보험료</div>
+                    <div class="local_income_tax_result text-secondary text-end w-25"><span id="longtermCareInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-primary w-50">납부보험료 합계액</div>
+                    <div class="income_tax_sum_result text-primary text-end w-25"><span id="totalHealthInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="title">▶ 고용보험</div>
+        <div class="row px-4">
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-secondary w-50">고용보험료</div>
+                    <div class="income_tax_sum_result text-secondary text-end w-25"><span id="employmentInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 border-top border-bottom">
+                <div class="row">
+                    <div class="income_tax_sum_label text-primary w-50">납부보험료 합계액</div>
+                    <div class="income_tax_sum_result text-primary text-end w-25"><span id="totalEmploymentInsurance">6,730</span> 원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.result-earned-income-tax .section {
+    margin: 1rem 0;
+}
+
+.result-earned-income-tax.hide-result {
+    display: none!important;
+}
